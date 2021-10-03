@@ -35,14 +35,14 @@ class BlogController extends Controller
     {
         $desc = e(Str::limit(strip_tags($post->content), 200));
         SEOTools::metatags();
-SEOTools::twitter();
-SEOTools::opengraph();
-SEOTools::jsonLd();
-
-SEOTools::setTitle($post->title);
-SEOTools::setDescription($desc);
-SEOTools::setCanonical(URL::current());
-SEOTools::addImages(url('images/post'.$post->thumbnail));
+        SEOTools::twitter();
+        SEOTools::opengraph();
+        SEOTools::jsonLd();
+        
+        SEOTools::setTitle($post->title);
+        SEOTools::setDescription($desc);
+        SEOTools::setCanonical(URL::current());
+        SEOTools::addImages(url('images/post'.$post->thumbnail));
 
         SEOMeta::addMeta('article:published_time', $post->created_at->toW3CString(), 'property');
         SEOMeta::addMeta('article:section', $post->category->name, 'property');
@@ -86,6 +86,6 @@ SEOTools::addImages(url('images/post'.$post->thumbnail));
     public function user()
     {
         $users = User::paginate();
-        return view('admin/users/index', compact('users'));
+        return view('admin.users.index', compact('users'));
     }
 }
